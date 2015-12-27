@@ -1,2 +1,4 @@
 # tfs
-Parse and Perform Operations on Terraform State
+Terraform State
+
+Parse terraform state files to perform different operations and transformations.

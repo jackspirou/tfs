@@ -1,4 +1,4 @@
-package tfs
+package state
 
 // ResourceState holds the state of a resource that is used so that
 // a provider can find and manage an existing resource as well as for
