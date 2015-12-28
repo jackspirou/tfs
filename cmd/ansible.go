@@ -12,7 +12,7 @@ import (
 var AnsibleCmd = &cobra.Command{
 	Use:     "ansible",
 	Aliases: []string{"a"},
-	Short:   "Terraform state file to ansible inventory.",
+	Short:   "Transform Terraform state file into ansible inventory.",
 	Long:    "Parse and transform a terraform state file into ansible dynamic inventory.",
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) == 0 {
