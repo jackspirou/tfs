@@ -1,8 +1,8 @@
 // Package state reads and parses terraform state files.
 package state
 
-// This file is primarily a subset of code from
-// github.com/hashicorp/terraform/state.go
+// All code below was copied from github.com/hashicorp/terraform/state.go
+// rather than including github.com/hashicorp/terraform as a dependency.
 
 import (
 	"bufio"

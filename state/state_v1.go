@@ -1,7 +1,7 @@
 package state
 
-// This file is primarily a subset of code from
-// github.com/hashicorp/terraform/state_v1.go
+// All code below was copied from github.com/hashicorp/terraform/state_v1.go
+// rather than including github.com/hashicorp/terraform as a dependency.
 
 import (
 	"bytes"
