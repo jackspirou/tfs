@@ -3,6 +3,9 @@ package state
 
 // All code below was copied from github.com/hashicorp/terraform/state.go
 // rather than including github.com/hashicorp/terraform as a dependency.
+//
+// Mozilla Public License, version 2.0
+// https://github.com/hashicorp/terraform/blob/master/LICENSE
 
 import (
 	"bufio"
