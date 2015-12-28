@@ -77,14 +77,13 @@ func (s *StateV1) String() string {
 		return "<no state>"
 	}
 
-	var buf bytes.Buffer
-
 	names := make([]string, 0, len(s.Resources))
 	for name, _ := range s.Resources {
 		names = append(names, name)
 	}
 	sort.Strings(names)
 
+	var buf bytes.Buffer
 	for _, k := range names {
 		rs := s.Resources[k]
 		id := rs.ID
@@ -211,7 +210,6 @@ type ResourceDependency struct {
 // ReadStateV1 reads a state structure out of a reader in the format that
 // was written by WriteState.
 func ReadStateV1(src io.Reader) (*StateV1, error) {
-	var result *StateV1
 	var err error
 	n := 0
 
@@ -243,6 +241,7 @@ func ReadStateV1(src io.Reader) (*StateV1, error) {
 
 	// Decode
 	dec := gob.NewDecoder(src)
+	var result *StateV1
 	if err := dec.Decode(&result); err != nil {
 		return nil, err
 	}

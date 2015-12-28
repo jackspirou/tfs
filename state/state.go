@@ -913,12 +913,11 @@ func (i *InstanceState) GoString() string {
 }
 
 func (i *InstanceState) String() string {
-	var buf bytes.Buffer
-
 	if i == nil || i.ID == "" {
 		return "<not created>"
 	}
 
+	var buf bytes.Buffer
 	buf.WriteString(fmt.Sprintf("ID = %s\n", i.ID))
 
 	attributes := i.Attributes
