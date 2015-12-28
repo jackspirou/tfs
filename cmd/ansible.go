@@ -1,11 +1,14 @@
 package cmd
 
 import (
+	"bytes"
+	"fmt"
+	"io/ioutil"
 	"log"
 
 	"github.com/spf13/cobra"
 
-	"github.com/jackspirou/tfs/ansible"
+	"github.com/jackspirou/tfs/transformations/ansible"
 )
 
 // AnsibleCmd transforms a terraform state file to ansible inventory.
@@ -18,8 +21,19 @@ var AnsibleCmd = &cobra.Command{
 		if len(args) == 0 {
 			log.Fatal("ansible needs a terraform state to transform")
 		}
-		if err := ansible.Inventory(args[0]); err != nil {
+
+		raw, err := ioutil.ReadFile(args[0])
+		if err != nil {
 			log.Fatal(err)
 		}
+
+		inventory := ansible.New()
+
+		result, err := inventory.Transform(bytes.NewReader(raw))
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		fmt.Println(result)
 	},
 }
