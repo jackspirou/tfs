@@ -1,7 +1,6 @@
 package ansible
 
 import (
-	"fmt"
 	"io"
 
 	"github.com/jackspirou/tfs/resources"
@@ -24,16 +23,17 @@ func (i Inventory) Transform(src io.Reader) (string, error) {
 		return "", err
 	}
 
+	var addr string
+
 	for _, m := range s.Modules {
 		for _, r := range m.Resources {
 			resource, err := resources.New(r)
 			if err != nil {
 				return "", err
 			}
-
-			fmt.Println(resource.Address())
+			addr = resource.Address()
 		}
 	}
 
-	return "", nil
+	return addr, nil
 }

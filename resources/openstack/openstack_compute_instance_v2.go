@@ -9,34 +9,33 @@ import (
 
 // ComputeInstanceV2 represents a openstack compute resource.
 type ComputeInstanceV2 struct {
-	name     string
-	count    int
-	resource *state.ResourceState
+	count int
+	name  string
+	*state.ResourceState
 }
 
 // NewComputeInstanceV2 returns a OpenStackComputeInstanceV2.
 func NewComputeInstanceV2(r *state.ResourceState) *ComputeInstanceV2 {
-	typ := r.Type
-	types := strings.Split(typ, ".")
+	types := strings.Split(r.Type, ".")
 	switch len(types) {
 	case 2:
-		return &ComputeInstanceV2{resource: r, name: types[1]}
+		return &ComputeInstanceV2{ResourceState: r, name: types[1]}
 	case 3:
 		i, err := strconv.Atoi(types[2])
 		if err != nil {
-			return &ComputeInstanceV2{resource: r, name: types[1]}
+			return &ComputeInstanceV2{ResourceState: r, name: types[1]}
 		}
-		return &ComputeInstanceV2{resource: r, name: types[1], count: i}
+		return &ComputeInstanceV2{ResourceState: r, name: types[1], count: i}
 	default:
-		return &ComputeInstanceV2{resource: r}
+		return &ComputeInstanceV2{ResourceState: r}
 	}
 }
 
 // Address returns the bound network addresses of this compute resource.
 func (c ComputeInstanceV2) Address() string {
 
-	for _, arg := range Arguments["network"] {
-		if ip := c.resource.Primary.Attributes[arg]; ip != "" {
+	for _, arg := range Attributes["network"] {
+		if ip := c.Primary.Attributes[arg]; ip != "" {
 			return ip
 		}
 	}
