@@ -12,7 +12,7 @@ import (
 
 // Resource describes a terraform resource provider.
 type Resource interface {
-	Address() string
+	PublicIP() string
 	Name() string
 	Count() int
 }
@@ -21,11 +21,9 @@ type Resource interface {
 // and returns an object that fufills the Resource interface.
 func New(r *state.ResourceState) (Resource, error) {
 	typ := strings.Split(r.Type, ".")[0]
-	if typ == "" {
-		return nil, errors.New("unable to determine resource type")
-	}
-
 	switch typ {
+	case "":
+		return nil, errors.New("unable to determine resource type")
 	case "openstack_compute_instance_v2":
 		return openstack.NewComputeInstanceV2(r), nil
 	default:

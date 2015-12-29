@@ -31,8 +31,8 @@ func NewComputeInstanceV2(r *state.ResourceState) *ComputeInstanceV2 {
 	}
 }
 
-// Address returns the bound network addresses of this compute resource.
-func (c ComputeInstanceV2) Address() string {
+// PublicIP returns the public bound network addresses of the compute resource.
+func (c ComputeInstanceV2) PublicIP() string {
 
 	for _, arg := range Attributes["network"] {
 		if ip := c.Primary.Attributes[arg]; ip != "" {

@@ -8,7 +8,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/jackspirou/tfs/transformations/ansible"
+	"github.com/jackspirou/tfs/transformers/ansible"
 )
 
 // AnsibleCmd transforms a terraform state file to ansible inventory.
@@ -27,9 +27,7 @@ var AnsibleCmd = &cobra.Command{
 			log.Fatal(err)
 		}
 
-		inventory := ansible.New()
-
-		result, err := inventory.Transform(bytes.NewReader(raw))
+		result, err := ansible.Inventory("json", bytes.NewReader(raw))
 		if err != nil {
 			log.Fatal(err)
 		}

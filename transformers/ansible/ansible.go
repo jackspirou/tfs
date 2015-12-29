@@ -7,16 +7,8 @@ import (
 	"github.com/jackspirou/tfs/state"
 )
 
-// Inventory represents Ansible Inventory.
-type Inventory struct{}
-
-// New returns a new ansible Inventory.
-func New() *Inventory {
-	return &Inventory{}
-}
-
-// Transform parses a terraform statefile and returns Ansible Inventory as JSON.
-func (i Inventory) Transform(src io.Reader) (string, error) {
+// Inventory parses a terraform statefile and returns Ansible Inventory as JSON.
+func Inventory(format string, src io.Reader) (string, error) {
 
 	s, err := state.ReadState(src)
 	if err != nil {
@@ -31,7 +23,7 @@ func (i Inventory) Transform(src io.Reader) (string, error) {
 			if err != nil {
 				return "", err
 			}
-			addr = resource.Address()
+			addr = resource.PublicIP()
 		}
 	}
 
