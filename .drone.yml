@@ -1,0 +1,14 @@
+
+build:
+  image: golang:1.5.2
+  commands:
+    - go get github.com/mitchellh/gox
+    - gox
+
+publish:
+  github_release:
+    api_key: $$GITHUB_TOKEN
+    files:
+      - tfs_*
+    when:
+      branch: master
