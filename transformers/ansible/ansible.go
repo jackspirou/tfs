@@ -8,24 +8,29 @@ import (
 )
 
 // Inventory parses a terraform statefile and returns Ansible Inventory as JSON.
-func Inventory(format string, src io.Reader) (string, error) {
+func Inventory(format string, src io.Reader) (map[string][]string, error) {
 
 	s, err := state.ReadState(src)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
-	var addr string
+	groups := make(map[string][]string, 0)
 
 	for _, m := range s.Modules {
 		for _, r := range m.Resources {
 			resource, err := resources.New(r)
 			if err != nil {
-				return "", err
+				return nil, err
 			}
-			addr = resource.PublicIP()
+			g := resource.Groups()
+			for _, i := range g {
+				if i != "" {
+					groups[i] = append(groups[i], resource.PublicIP())
+				}
+			}
 		}
 	}
 
-	return addr, nil
+	return groups, nil
 }

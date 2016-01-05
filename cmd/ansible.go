@@ -11,6 +11,10 @@ import (
 	"github.com/jackspirou/tfs/transformers/ansible"
 )
 
+func init() {
+	AnsibleCmd.Flags().String("fmt", "ini", "Formats supported are INI, JSON, YAML, TOML")
+}
+
 // AnsibleCmd transforms a terraform state file to ansible inventory.
 var AnsibleCmd = &cobra.Command{
 	Use:     "ansible",
@@ -32,6 +36,12 @@ var AnsibleCmd = &cobra.Command{
 			log.Fatal(err)
 		}
 
-		fmt.Println(result)
+		for key, value := range result {
+			fmt.Printf("[%s]\n", key)
+			for _, ip := range value {
+				fmt.Printf("%s\n", ip)
+			}
+			fmt.Println("")
+		}
 	},
 }

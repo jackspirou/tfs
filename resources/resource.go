@@ -13,6 +13,7 @@ import (
 // Resource describes a terraform resource provider.
 type Resource interface {
 	PublicIP() string
+	Groups() []string
 	Name() string
 	Count() int
 }

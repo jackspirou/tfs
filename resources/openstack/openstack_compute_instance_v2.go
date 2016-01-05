@@ -43,6 +43,12 @@ func (c ComputeInstanceV2) PublicIP() string {
 	return ""
 }
 
+// Groups returns the group names of the metadata.groups attribute.
+func (c ComputeInstanceV2) Groups() []string {
+	groups := c.Primary.Attributes["metadata.groups"]
+	return strings.Split(groups, ",")
+}
+
 // Name returns the name for this compute resource.
 func (c ComputeInstanceV2) Name() string {
 	return c.name
