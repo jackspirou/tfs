@@ -19,4 +19,3 @@ publish:
       - tfs_*
     when:
       branch: master
-      event: tag
