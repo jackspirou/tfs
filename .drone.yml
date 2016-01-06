@@ -9,13 +9,13 @@ build:
     - GOARCH=amd64
     - CGO_ENABLED=0
   commands:
-    - go get github.com/mitchellh/gox
-    - gox
+    - make build
+    - make release
 
 publish:
   github_release:
     api_key: $$GITHUB_TOKEN
     files:
-      - tfs_*
+      - dist/*
     when:
-      branch: master
+      event: tag
