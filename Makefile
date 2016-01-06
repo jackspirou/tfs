@@ -2,10 +2,20 @@ DIST := dist
 BIN := bin
 EXECUTABLE := tfs
 
+LDFLAGS += -X "main.version=$(VERSION)"
+VERSION ?= $(shell cat VERSION)
+
 RELEASES ?= $(DIST)/$(EXECUTABLE)-linux-amd64 \
 	$(DIST)/$(EXECUTABLE)-linux-386 \
 	$(DIST)/$(EXECUTABLE)-linux-arm \
 	$(DIST)/$(EXECUTABLE)-darwin-amd64
+
+clean:
+	@go clean -i ./...
+	@rm -rf $(BIN) $(DIST)
+
+deps:
+	go get -t ./...
 
 build: $(BIN)/$(EXECUTABLE)
 
