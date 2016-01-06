@@ -1,3 +1,6 @@
+clone:
+  path: github.com/jackspirou/tfs
+
 build:
   image: golang:1.5.2
   environment:
