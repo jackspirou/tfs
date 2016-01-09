@@ -908,6 +908,7 @@ func (s *InstanceState) Equal(other *InstanceState) bool {
 	return true
 }
 
+// GoString returns the InstanceState as string with a Go-syntax representation of itself value.
 func (i *InstanceState) GoString() string {
 	return fmt.Sprintf("*%#v", *i)
 }
@@ -922,7 +923,7 @@ func (i *InstanceState) String() string {
 
 	attributes := i.Attributes
 	attrKeys := make([]string, 0, len(attributes))
-	for ak, _ := range attributes {
+	for ak := range attributes {
 		if ak == "id" {
 			continue
 		}
