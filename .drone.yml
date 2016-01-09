@@ -16,6 +16,6 @@ publish:
   github_release:
     api_key: $$GITHUB_TOKEN
     files:
-      - dist/*
+      - *.tar.gz
     when:
       event: tag
