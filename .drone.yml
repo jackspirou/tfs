@@ -16,6 +16,6 @@ publish:
   github_release:
     api_key: $$GITHUB_TOKEN
     files:
-      - *.tar.gz
+      - tfs_*.tar.gz
     when:
       event: tag
