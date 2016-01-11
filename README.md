@@ -2,5 +2,3 @@
 Terraform State
 
 Parse and transform Terraform state files.
-
-Currently working on Ansible inventory support.
