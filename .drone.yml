@@ -14,6 +14,9 @@ build:
 
 publish:
   github_release:
+    image: jackspirou/drone-github-release
+    checksums:
+      - sha1
     api_key: $$GITHUB_TOKEN
     files:
       - tfs_*.tar.gz
