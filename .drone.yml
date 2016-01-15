@@ -16,7 +16,12 @@ publish:
   github_release:
     image: jackspirou/drone-github-release
     checksums:
+      - md5
       - sha1
+      - sha256
+      - sha512
+      - adler32
+      - crc32
     api_key: $$GITHUB_TOKEN
     files:
       - tfs_*.tar.gz
